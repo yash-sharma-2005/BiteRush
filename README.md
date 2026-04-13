@@ -140,8 +140,8 @@ This project is licensed under the MIT License.
 ## 👤 Contact
 
 **Your Name**
-GitHub: [https://github.com/your-username](https://github.com/your-username)
-Email: [your-email@example.com](mailto:your-email@example.com)
+GitHub: [https://github.com/yash-sharma-2005](https://github.com/yash-sharma-2005)
+Email: [yash.sharmaaa2005@gmail.com](mailto:yash.sharmaaa2005@gmail.com)
 
 ---
 
