@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteRush | Premium Food Ordering</title>
+    <!-- Use Outfit font for a modern, sleek tech-restaurant aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for standard UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <!-- Gradient Orbs in Background -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    
+    <nav class="navbar glass-effect">
+        <div class="logo"><i class="fa-solid fa-bolt text-primary" style="margin-right: 8px;"></i>Bite<span class="text-primary">Rush</span></div>
+        <div class="nav-actions">
+            <button id="cartIcon" class="icon-btn" aria-label="Open Cart">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cartBadge" class="badge">0</span>
+            </button>
+        </div>
+    </nav>
+    
+    <main id="appContent">
+        <!-- View container where pages will be dynamically swapped -->
+        
+        <!-- ==============================
+             HOME / MENU VIEW
+             ============================== -->
+        <section id="menuView" class="view active fade-in">
+            <header class="hero">
+                <div class="hero-content">
+                    <h1>Exceptional tastes, <br> <span class="text-gradient">delivered to you.</span></h1>
+                    <p>Experience culinary masterpieces picked right from our premium kitchen directly to your table.</p>
+                </div>
+            </header>
+            
+            <div class="container">
+                <div class="menu-filters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="burgers">Burgers</button>
+                    <button class="filter-btn" data-category="pizza">Pizza</button>
+                    <button class="filter-btn" data-category="desserts">Desserts</button>
+                    <button class="filter-btn" data-category="drinks">Drinks</button>
+                </div>
+                
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Menu items injected dynamically via app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================
+             CART & SUMMARY VIEW
+             ============================== -->
+        <section id="cartView" class="view">
+            <div class="container">
+                <div class="header-with-back">
+                    <button class="back-btn" onclick="app.showMain()"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</button>
+                    <h2>Your Order</h2>
+                </div>
+                
+                <div class="cart-layout">
+                    <div class="cart-items glass-effect" id="cartItemsContainer">
+                        <!-- Cart items injected here -->
+                    </div>
+                    
+                    <div class="order-summary glass-effect">
+                        <h3>Order Summary</h3>
+                        <div class="summary-line">
+                            <span>Subtotal</span>
+                            <span id="subtotalAmount">$0.00</span>
+                        </div>
+                        <div class="summary-line">
+                            <span>Taxes (5%)</span>
+                            <span id="taxAmount">$0.00</span>
+                        </div>
+                        <div class="summary-line">
+                            <span>Delivery Fee</span>
+                            <span id="deliveryAmount">$2.99</span>
+                        </div>
+                        <br/>
+                        <div class="summary-divider"></div>
+                        <br/>
+                        <div class="summary-line total">
+                            <span>Total</span>
+                            <span id="totalAmount" class="text-primary">$0.00</span>
+                        </div>
+                        <button id="checkoutBtn" class="primary-btn full-width mt-4">Proceed to Payment<i class="fa-solid fa-arrow-right icon-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================
+             PAYMENT VIEW
+             ============================== -->
+        <section id="paymentView" class="view">
+            <div class="container small-container">
+                <div class="header-with-back">
+                    <button class="back-btn" onclick="app.showCart()"><i class="fa-solid fa-arrow-left"></i> Back to Cart</button>
+                    <h2>Payment Details</h2>
+                </div>
+                
+                <div class="payment-card glass-effect">
+                    <div class="amount-display">
+                        <small>Amount to pay</small>
+                        <h1 id="paymentTotalAmount" class="text-gradient">$0.00</h1>
+                    </div>
+                    
+                    <form id="paymentForm" class="payment-form">
+                        <div class="form-group">
+                            <label>Cardholder Name</label>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <input type="text" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="password" placeholder="123" maxlength="3" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="primary-btn full-width mt-4" id="payBtn">
+                            <span class="btn-text">Pay Now <i class="fa-solid fa-lock icon-right"></i></span>
+                            <div class="spinner hidden"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================
+             SUCCESS MODAL
+             ============================== -->
+        <div id="successModal" class="modal">
+            <div class="modal-content glass-effect scale-in">
+                <div class="success-icon pulse-animation">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h2>Order Confirmed!</h2>
+                <p class="text-muted">Your delicious food is being prepared and will be dispatched shortly.</p>
+                <div id="receiptDetails" class="receipt"></div>
+                <button class="primary-btn mt-4 full-width" onclick="app.resetApp()">Back to Home</button>
+            </div>
+        </div>
+    </main>
+    
+    <script src="./js/data.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
