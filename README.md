@@ -1,4 +1,3 @@
-````md
 # 🚀 Project Name
 
 A brief, clear, and compelling description of your project. Explain what problem it solves and why it exists.
